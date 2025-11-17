@@ -1,5 +1,14 @@
 // data/packages.ts
-export const packages = [
+
+export interface Package {
+  id: number;
+  title: string;
+  hours: number;
+  price: number;
+  unlimited: boolean;
+}
+
+export const packages: Package[] = [
   {
     id: 1,
     title: "8 HOURS",
