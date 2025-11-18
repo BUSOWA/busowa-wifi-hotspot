@@ -1,13 +1,4 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/airtel/initiate/route": "app/api/airtel/initiate/route.js",
-  "/api/airtel/callback/route": "app/api/airtel/callback/route.js",
-  "/api/mtn/callback/route": "app/api/mtn/callback/route.js",
-  "/api/mtn/initiate/route": "app/api/mtn/initiate/route.js",
-  "/api/vouchers/find/route": "app/api/vouchers/find/route.js",
-  "/api/vouchers/generate/route": "app/api/vouchers/generate/route.js",
-  "/api/vouchers/send/route": "app/api/vouchers/send/route.js",
-  "/api/vouchers/status/route": "app/api/vouchers/status/route.js",
-  "/api/vouchers/validate/route": "app/api/vouchers/validate/route.js",
   "/page": "app/page.js"
 }
