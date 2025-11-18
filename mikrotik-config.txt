@@ -1,0 +1,106 @@
+# ========================================
+# MIKROTIK RBAC1200W-IN HOTSPOT CONFIGURATION
+# For BUSOWA WIFI HOTSPOT - Vercel Integration
+# ========================================
+
+# Step 1: Configure IP Address for Hotspot Interface
+# (Adjust interface name - usually wlan1 or wlan2 for 2.4GHz/5GHz)
+/ip address add address=192.168.88.1/24 interface=wlan1 comment="Hotspot Interface"
+
+# Step 2: Create IP Pool for Hotspot Users
+/ip pool add name=hotspot-pool ranges=192.168.88.10-192.168.88.254
+
+# Step 3: Create DHCP Server for Hotspot
+/ip dhcp-server add interface=wlan1 name=hotspot-dhcp address-pool=hotspot-pool disabled=no
+
+# Step 4: Create Hotspot Profile
+/ip hotspot profile add name=busowa-wifi \
+    hotspot-address=192.168.88.1 \
+    dns-name=busowa-wifi-hotspot.vercel.app \
+    html-directory=flash/hotspot \
+    http-cookie-lifetime=1d \
+    http-proxy=0.0.0.0:0 \
+    login-by=http-pap,http-chap,mac \
+    split-user-domain=yes \
+    use-radius=no
+
+# Step 5: Create Hotspot Server
+/ip hotspot add name=busowa-wifi \
+    interface=wlan1 \
+    profile=busowa-wifi \
+    address-pool=hotspot-pool \
+    disabled=no
+
+# Step 6: Configure Hotspot User Profile (Default)
+/ip hotspot user profile add name=default \
+    rate-limit=0/0 \
+    shared-users=1 \
+    keepalive-timeout=00:02:00 \
+    status-autorefresh=00:00:30
+
+# Step 7: Configure DNS for Hotspot Users
+/ip hotspot profile set busowa-wifi \
+    dns-name="" \
+    http-proxy=0.0.0.0:0 \
+    html-directory-override=""
+
+# Step 8: Create Redirect Rule to Vercel Payment Portal
+/ip hotspot walled-garden ip add action=accept \
+    dst-host=busowa-wifi-hotspot.vercel.app \
+    comment="Allow Vercel payment portal"
+
+/ip hotspot walled-garden ip add action=accept \
+    dst-host=*.vercel.app \
+    comment="Allow Vercel CDN"
+
+# Step 9: Upload custom login.html that redirects to Vercel
+# (You'll need to create this file - see instructions below)
+
+# Step 10: Configure NAT Masquerade (if not already configured)
+/ip firewall nat add chain=srcnat action=masquerade out-interface=ether1 comment="NAT for Internet"
+
+# Step 11: Allow DNS for hotspot users
+/ip firewall nat add chain=dstnat action=dst-nat to-addresses=192.168.88.1 to-ports=53 \
+    protocol=udp dst-port=53 in-interface=wlan1 comment="Hotspot DNS"
+
+# Step 12: Configure firewall rules for hotspot
+/ip firewall filter add chain=input action=accept connection-state=established,related \
+    in-interface=wlan1 comment="Allow established hotspot connections"
+
+/ip firewall filter add chain=input action=accept protocol=icmp in-interface=wlan1 \
+    comment="Allow ICMP for hotspot"
+
+/ip firewall filter add chain=input action=accept protocol=tcp dst-port=80 \
+    in-interface=wlan1 comment="Allow HTTP for hotspot"
+
+/ip firewall filter add chain=input action=accept protocol=tcp dst-port=443 \
+    in-interface=wlan1 comment="Allow HTTPS for hotspot"
+
+/ip firewall filter add chain=input action=accept protocol=udp dst-port=53 \
+    in-interface=wlan1 comment="Allow DNS for hotspot"
+
+/ip firewall filter add chain=forward action=accept \
+    in-interface=wlan1 out-interface=ether1 comment="Forward hotspot to internet"
+
+/ip firewall filter add chain=forward action=accept \
+    in-interface=ether1 out-interface=wlan1 connection-state=established,related \
+    comment="Forward established from internet to hotspot"
+
+# ========================================
+# IMPORTANT NOTES:
+# ========================================
+# 1. Replace 'wlan1' with your actual WiFi interface name
+#    Check with: /interface wireless print
+#
+# 2. Replace 'ether1' with your WAN/internet interface name
+#    Check with: /interface ethernet print
+#
+# 3. Adjust IP address (192.168.88.1) if needed for your network
+#
+# 4. After configuration, create a custom login.html file that
+#    redirects to: https://busowa-wifi-hotspot.vercel.app/
+#
+# 5. To enable hotspot, run: /ip hotspot enable busowa-wifi
+#
+# ========================================
+
