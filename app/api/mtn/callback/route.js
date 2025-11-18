@@ -14,12 +14,18 @@ export async function POST(request) {
       // Send via WhatsApp/SMS
       await fetch("/api/vouchers/send", {
         method: "POST",
-        body: JSON.stringify({ phone: transaction.phone, code: voucher.code }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          phone: transaction.phone, 
+          username: voucher.username,
+          code: voucher.code 
+        }),
       });
 
       // Update status
       transaction.status = "COMPLETED";
       transaction.voucher = voucher.code;
+      transaction.username = voucher.username;
     }
   }
 
@@ -32,6 +38,9 @@ function generateVoucherCode(packageId) {
     2: { hours: 24 },
     3: { hours: 48 },
   };
+  // Generate username (e.g., BUSOWA1234)
+  const username = "BUSOWA" + Math.random().toString(36).substring(2, 6).toUpperCase();
+  // Generate password/voucher code (e.g., ABC123XY)
   const code = Math.random().toString(36).substring(2, 10).toUpperCase();
-  return { code, ...codes[packageId] };
+  return { username, code, ...codes[packageId] };
 }

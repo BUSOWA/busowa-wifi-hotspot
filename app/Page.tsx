@@ -30,11 +30,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-12 text-center text-xs text-gray-500">
-        <p>Need help? Contact support:</p>
-        <p className="font-mono">+256 781280406 / +256 782528038</p>
-        <p className="mt-1">MAC: 0E:F1:CA:4C:F1:36</p>
-        <p className="mt-1">Powered by XenFi</p>
+      <footer className="mt-12 text-center text-xs text-yellow-600 bg-yellow-50 py-4 rounded-lg border border-yellow-200">
+        <p className="text-yellow-700 font-medium">Need help? Contact support:</p>
+        <p className="font-mono text-yellow-800 font-semibold">0758266233 / 0702578781</p>
+        <p className="mt-1 text-yellow-700">MAC: 0E:F1:CA:4C:F1:36</p>
+        <p className="mt-1 text-yellow-700 font-medium">Developed and Powered by Zeex Group [0755772114]</p>
       </footer>
 
       {/* Payment Modal */}
