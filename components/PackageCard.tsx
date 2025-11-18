@@ -1,8 +1,11 @@
 // components/PackageCard.tsx
 "use client";
-import { openPaymentModal } from "../lib/modal";
 
 export default function PackageCard({ pkg }: { pkg: any }) {
+  const openPaymentModal = (pkg: any) => {
+    window.dispatchEvent(new CustomEvent("open-payment", { detail: pkg }));
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md p-4 flex justify-between items-center">
       <div>
