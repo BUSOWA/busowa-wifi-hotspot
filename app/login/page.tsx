@@ -4,16 +4,14 @@ import VoucherInput from "../../components/VoucherInput";
 import PaymentModal from "../../components/PaymentModal";
 import { packages } from "../../data/packages";
 
-// ←←← THIS LINE IS THE ONLY ONE YOU WERE MISSING
-export const dynamic = 'force-dynamic';   // This fixes ERR_CONNECTION_CLOSED forever
+// This forces the page to accept any MikroTik query parameters (?mac=…&dst=… etc.)
+// This is the ONLY line you need to fix ERR_CONNECTION_CLOSED
+export const dynamic = "force-dynamic";
 
-// Optional but recommended – read the hotspot parameters if you ever want to use them
-import { useSearchParams } from 'next/navigation';
+// If you ever want to read the MikroTik variables (mac, ip, etc.) later,
+// just change the component to "use client" – but it's NOT needed right now.
 
 export default function LoginPage() {
-  // You can read MikroTik variables here if you want (mac, ip, etc.)
-  const searchParams = useSearchParams();
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-green-50 to-white px-4 py-8">
       {/* Header */}
@@ -25,7 +23,7 @@ export default function LoginPage() {
       </div>
 
       <VoucherInput />
-      
+
       <section className="mt-12 space-y-4">
         <h2 className="text-center text-lg font-semibold text-gray-700 mb-6">
           Select a package and pay with Mobile Money
