@@ -1,20 +1,16 @@
 // app/login/page.tsx
+
 import PackageCard from "../../components/PackageCard";
 import VoucherInput from "../../components/VoucherInput";
 import PaymentModal from "../../components/PaymentModal";
 import { packages } from "../../data/packages";
 
-// This forces the page to accept any MikroTik query parameters (?mac=…&dst=… etc.)
-// This is the ONLY line you need to fix ERR_CONNECTION_CLOSED
+// ←←← THIS ONE LINE IS ALL YOU NEED — MUST BE HERE, EXACTLY LIKE THIS
 export const dynamic = "force-dynamic";
-
-// If you ever want to read the MikroTik variables (mac, ip, etc.) later,
-// just change the component to "use client" – but it's NOT needed right now.
 
 export default function LoginPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-green-50 to-white px-4 py-8">
-      {/* Header */}
       <div className="flex flex-col items-center mb-8">
         <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
           WiFi
