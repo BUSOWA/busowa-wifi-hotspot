@@ -1,0 +1,7 @@
+"use strict";(()=>{var e={};e.id=828,e.ids=[828],e.modules={399:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},9913:(e,t,r)=>{r.r(t),r.d(t,{originalPathname:()=>h,patchFetch:()=>l,requestAsyncStorage:()=>p,routeModule:()=>u,serverHooks:()=>c,staticGenerationAsyncStorage:()=>d});var o={};r.r(o),r.d(o,{POST:()=>i});var s=r(9303),n=r(8716),a=r(670);async function i(e){let{phone:t,username:r,code:o}=await e.json();return console.log("Sending voucher to",t,":",`BUSOWA WIFI HOTSPOT
+
+Your WiFi credentials:
+Username: ${r}
+Password: ${o}
+
+Use these to connect to the WiFi network.`),Response.json({sent:!0})}let u=new s.AppRouteRouteModule({definition:{kind:n.x.APP_ROUTE,page:"/api/vouchers/send/route",pathname:"/api/vouchers/send",filename:"route",bundlePath:"app/api/vouchers/send/route"},resolvedPagePath:"C:\\Users\\DJ PROPERTY\\Desktop\\busowa-wifi-hotspot\\app\\api\\vouchers\\send\\route.js",nextConfigOutput:"",userland:o}),{requestAsyncStorage:p,staticGenerationAsyncStorage:d,serverHooks:c}=u,h="/api/vouchers/send/route";function l(){return(0,a.patchFetch)({serverHooks:c,staticGenerationAsyncStorage:d})}},9303:(e,t,r)=>{e.exports=r(517)}};var t=require("../../../../webpack-runtime.js");t.C(e);var r=e=>t(t.s=e),o=t.X(0,[948],()=>r(9913));module.exports=o})();

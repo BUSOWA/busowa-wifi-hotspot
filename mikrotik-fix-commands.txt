@@ -1,0 +1,27 @@
+# Fix commands for MikroTik RBAC1200W-IN
+# Your hotspot is showing as INVALID - let's fix it
+
+# Step 1: Check if wifi1 is in a bridge
+/interface bridge port print
+
+# Step 2: Remove wifi1 from bridge if it's there (we'll add it back after)
+# First, let's see what bridge it's in
+
+# Step 3: Remove the invalid hotspot
+/ip hotspot remove busowa-wifi
+
+# Step 4: Check bridge configuration
+/interface bridge print
+
+# Step 5: Create hotspot on bridge-LAN instead (since wifi1 is likely a slave)
+/ip hotspot remove busowa-wifi
+/ip hotspot add name=busowa-wifi interface=bridge-LAN profile=busowa-wifi address-pool=hotspot-pool disabled=no
+
+# OR if wifi1 needs to be standalone:
+# Remove wifi1 from bridge first
+/interface bridge port remove [find interface=wifi1]
+
+# Then create hotspot on wifi1
+/ip hotspot remove busowa-wifi
+/ip hotspot add name=busowa-wifi interface=wifi1 profile=busowa-wifi address-pool=hotspot-pool disabled=no
+
