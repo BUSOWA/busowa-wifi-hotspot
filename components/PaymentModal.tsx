@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { closePaymentModal } from "@/lib/modal";
+import { closePaymentModal } from "../lib/modal";
 
 export default function PaymentModal() {
   const [phone, setPhone] = useState("");

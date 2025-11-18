@@ -1,6 +1,6 @@
 // components/PackageCard.tsx
 "use client";
-import { openPaymentModal } from "@/lib/modal";
+import { openPaymentModal } from "../lib/modal";
 
 export default function PackageCard({ pkg }: { pkg: any }) {
   return (
