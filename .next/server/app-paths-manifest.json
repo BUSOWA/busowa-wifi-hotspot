@@ -1,6 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/airtel/Initiate/route": "app/api/airtel/Initiate/route.js",
+  "/api/airtel/initiate/route": "app/api/airtel/initiate/route.js",
   "/api/airtel/callback/route": "app/api/airtel/callback/route.js",
   "/api/mtn/callback/route": "app/api/mtn/callback/route.js",
   "/api/mtn/initiate/route": "app/api/mtn/initiate/route.js",

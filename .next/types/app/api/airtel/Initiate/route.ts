@@ -1,8 +1,8 @@
-// File: C:\Users\DJ PROPERTY\Desktop\busowa-wifi-hotspot\app\api\airtel\Initiate\route.js
-import * as entry from '../../../../../../app/api/airtel/Initiate/route.js'
+// File: C:\Users\DJ PROPERTY\Desktop\busowa-wifi-hotspot\app\api\airtel\initiate\route.js
+import * as entry from '../../../../../../app/api/airtel/initiate/route.js'
 import type { NextRequest } from 'next/server.js'
 
-type TEntry = typeof import('../../../../../../app/api/airtel/Initiate/route.js')
+type TEntry = typeof import('../../../../../../app/api/airtel/initiate/route.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
